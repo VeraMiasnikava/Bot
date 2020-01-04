@@ -2,9 +2,11 @@ package programbot.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import programbot.utils.HibernateSessionFactory;
 
 import javax.persistence.*;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,18 +21,18 @@ public class LabProgramming {
 
 
     @Getter
-    @Column(name = "titl", length=100)
+    @Column(name = "title", length=100)
     private String title;
 
     @Getter
     @Setter
-    @Column(name= "semest")
+    @Column(name= "semestr")
     private int semestr;
-/*
+
     @Getter
     @Setter
     @OneToMany(mappedBy = "labProgramming", cascade = CascadeType.ALL, orphanRemoval = true, fetch=FetchType.LAZY)
-    private List<ProgrammingLesson> lessons;*/
+    private List<ProgrammingLesson> lessons=new ArrayList<>();
 
     public LabProgramming() {
     }
@@ -55,4 +57,6 @@ public class LabProgramming {
                 ", semestr=" + semestr +
                 '}';
     }
+
+
 }

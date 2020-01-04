@@ -9,9 +9,10 @@
 <property name="show-sql">true</property>
 <property name="hibernate.connection.dialect">org.hibernate.dialect.PostgreSQL12Dialect</property>
 <property name="current_session_context_class">thread</property>
-<property name="connection.pool_size">1</property>
 
-    <property name="hibernate.hbm2ddl.auto">create</property>
+
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="hibernate.generate_statistics">true</property>
 
     <property name="hibernate.connection.Charset">UTF8</property>
     <property name="hibernate.connection.CharacterEncoding">UTF8</property>
@@ -20,6 +21,6 @@
     <mapping class="programbot.entities.Student"/>
     <mapping class="programbot.entities.LabProgramming"/>
     <mapping class="programbot.entities.ProgrammingLesson"/>
-    <mapping class="programbot.entities.ProgrammingLesson$ProgrLessonKey"/>
+
 </session-factory>
 </hibernate-configuration>

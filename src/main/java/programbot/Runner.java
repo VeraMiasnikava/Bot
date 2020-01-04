@@ -1,8 +1,17 @@
 package programbot;
 
 import lombok.extern.log4j.Log4j;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import programbot.entities.LabProgramming;
+import programbot.entities.ProgrammingLesson;
+import programbot.entities.Student;
+import programbot.services.LabProgrammingService;
+import programbot.services.ProgrammingLessonService;
+import programbot.services.StudentService;
 import programbot.utils.HibernateSessionFactory;
+
+import java.io.UnsupportedEncodingException;
 
 @Log4j
 public class Runner {
@@ -17,26 +26,63 @@ public class Runner {
         }catch (TelegramApiRequestException e){
             e.printStackTrace();
         }
-*/ SessionFactory session = HibernateSessionFactory.getSessionFactory();
-     /*  try {
+*/
+//SessionFactory sessionFactory = HibernateSessionFactory.getSessionFactory();
+//Session session= HibernateSessionFactory.getSession();
+     try {
         StudentService studentService = new StudentService();
-        Student student = new Student(6,"Юля","Жукова","ПО000");
-           // ProgrammingLesson lesson=new ProgrammingLesson(student, 1 );
-        studentService.createStudent(student);
-        student=studentService.findStudent(6);
-        student.setGroupa("go999");
-           // studentService.updateStudent(student);
-        System.out.println(student);
+        int n=3, m=4;
+        Student student = new Student(n,"Юля","Жукова","ПО000");
+         // studentService.saveStudent(student);
+         //session= HibernateSessionFactory.getSession();
+          Student student2 = new Student(m,"Паша","Внуков","ПО000");
+          //studentService.saveStudent(student2);
+         System.out.println(studentService.findAllStudents().toString());;
+       // student.setGroupa("go999");
+         // student2.setGroupa("go999");
+       // studentService.updateStudent(student);
+        //  studentService.updateStudent(student2);
+         System.out.println(studentService.findAllStudents().toString());
+         student=studentService.findStudent(1);
+         System.out.println("нашли:"+student);
+        System.out.println( student.getLessons().toString());
+        // for(ProgrammingLesson lesson:student.getLessons()) {
+               // System.out.println(lesson.getLabProgramming()+ "     " + lesson.isWasPresent());
+           //  lesson.getLabProgramming();
+             // lesson.isWasPresent();
+        // }
+        // Student student3 = new Student(n,"Юля","Жукова","ПО000");
+        // studentService.deleteStudent(student3);
+        // System.out.println(studentService.findAllStudents().toString());
+
        // bot.setMessage(student.toString());
-            String snm=new String(student.getName().getBytes("UTF-8"), "cp1251");
-            System.out.println(snm);
+          //  String snm=new String(student.getName().getBytes("UTF-8"), "cp1251");
+           // System.out.println(snm);
+
             LabProgrammingService labProgrammingService=new LabProgrammingService();
-            LabProgramming labWorkProgramming=new LabProgramming(1,"интегрированная среда разработки", 1);
-            labProgrammingService.createLab(labWorkProgramming);
+            LabProgramming labWorkProgramming=new LabProgramming(3,"интегрированная среда разработки", 1);
+           // labProgrammingService.saveLab(labWorkProgramming);
+          LabProgramming labWorkProgramming2=new LabProgramming(4,"ввод-вывод данных", 1);
+          //labProgrammingService.saveLab(labWorkProgramming2);
+         System.out.println( labProgrammingService.findAllLabs().toString());
+
+         Student student5 = new Student(n,"Юля","Жукова","ПО000");
+         LabProgramming labWorkProgramming3=new LabProgramming(1,"интегрированная среда разработки", 1);
+        // LabProgramming labWorkProgramming4=new LabProgramming(2,"ввод-вывод данных", 1);
+          ProgrammingLessonService programmingLessonService=new ProgrammingLessonService();
+         ProgrammingLesson programmingLesson=new ProgrammingLesson(student5,labWorkProgramming3);
+        // programmingLessonService.saveLesson(programmingLesson);
+         // ProgrammingLesson programmingLesson2=new ProgrammingLesson(student3,labWorkProgramming4);
+        //  programmingLessonService.saveLesson(programmingLesson2);
+         student5.addProgrammingLesson(programmingLesson);
+        studentService.updateStudent(student5);
+         programmingLessonService.saveLesson(programmingLesson);
+
+
 
         } catch (UnsupportedEncodingException ex) {
 
-        }*/
+        }
 
 
 
