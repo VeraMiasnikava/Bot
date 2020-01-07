@@ -1,7 +1,36 @@
+buildscript {
+    repositories {
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+    }
+    dependencies {
+        classpath 'io.freefair.gradle:lombok-plugin:3.8.4'
+    }
+}
+/*
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "io.franzbecker:gradle-lombok:3.2.0"
+    }
+}*/
+
+
+
 plugins {
     id 'java'
     id 'application'
+   // id 'org.springframework.boot' version '2.1.7.RELEASE'
+   // id 'io.freefair.lombok' version '3.8.4'
+   // id "io.franzbecker.gradle-lombok" version "3.2.0"
+    id 'io.franzbecker.gradle-lombok' version '1.8'
 }
+apply plugin: "io.franzbecker.gradle-lombok"
 
 group 'miasnikova'
 version '1.0-SNAPSHOT'
@@ -12,6 +41,10 @@ repositories {
     mavenCentral()
 }
 
+
+
+//apply plugin: "io.freefair.lombok"
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
@@ -20,8 +53,12 @@ dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '1.2.1'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.12.1'
 
+
+
     compileOnly 'org.projectlombok:lombok:1.18.10'
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
+    compile 'org.projectlombok:lombok:1.18.10'
+   // compile 'io.franzbecker:gradle-lombok:3.2.0'
 
     compile group: 'org.slf4j', name: 'slf4j-nop', version: '2.0.0-alpha1'
 

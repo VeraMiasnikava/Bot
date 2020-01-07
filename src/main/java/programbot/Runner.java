@@ -12,6 +12,9 @@ import programbot.services.StudentService;
 import programbot.utils.HibernateSessionFactory;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 @Log4j
 public class Runner {
@@ -37,7 +40,14 @@ public class Runner {
          //session= HibernateSessionFactory.getSession();
           Student student2 = new Student(m,"Паша","Внуков","ПО000");
           //studentService.saveStudent(student2);
-         System.out.println(studentService.findAllStudents().toString());;
+         System.out.println(studentService.findAllStudents().toString());
+       /*  List<Student> students=studentService.findAllStudents();
+         System.out.println("students.size = " + students.size());
+         for (Iterator<Student> it = students.iterator(); it.hasNext();) {
+             Student student11 = (Student) it.next();
+             System.out.println(student11.toString());
+             System.out.println(student11.getLessons().toString());
+         }*/
        // student.setGroupa("go999");
          // student2.setGroupa("go999");
        // studentService.updateStudent(student);
@@ -45,12 +55,13 @@ public class Runner {
          System.out.println(studentService.findAllStudents().toString());
          student=studentService.findStudent(1);
          System.out.println("нашли:"+student);
-        System.out.println( student.getLessons().toString());
-        // for(ProgrammingLesson lesson:student.getLessons()) {
-               // System.out.println(lesson.getLabProgramming()+ "     " + lesson.isWasPresent());
+       //  ArrayList<ProgrammingLesson> programmingLessonArrayList=new ArrayList<>(student.getLessons());
+        //System.out.println( student.getLessons().toString());
+         //for(ProgrammingLesson lesson:student.getLessons()) {
+              //  System.out.println(lesson.getLabProgramming().toString()+ "     " + lesson.isWasPresent());
            //  lesson.getLabProgramming();
              // lesson.isWasPresent();
-        // }
+         //}
         // Student student3 = new Student(n,"Юля","Жукова","ПО000");
         // studentService.deleteStudent(student3);
         // System.out.println(studentService.findAllStudents().toString());
@@ -66,17 +77,20 @@ public class Runner {
           //labProgrammingService.saveLab(labWorkProgramming2);
          System.out.println( labProgrammingService.findAllLabs().toString());
 
-         Student student5 = new Student(n,"Юля","Жукова","ПО000");
+         Student student5 = new Student(10,"Юля","Жукова","ПО000");
+
          LabProgramming labWorkProgramming3=new LabProgramming(1,"интегрированная среда разработки", 1);
         // LabProgramming labWorkProgramming4=new LabProgramming(2,"ввод-вывод данных", 1);
           ProgrammingLessonService programmingLessonService=new ProgrammingLessonService();
          ProgrammingLesson programmingLesson=new ProgrammingLesson(student5,labWorkProgramming3);
-        // programmingLessonService.saveLesson(programmingLesson);
-         // ProgrammingLesson programmingLesson2=new ProgrammingLesson(student3,labWorkProgramming4);
-        //  programmingLessonService.saveLesson(programmingLesson2);
          student5.addProgrammingLesson(programmingLesson);
-        studentService.updateStudent(student5);
-         programmingLessonService.saveLesson(programmingLesson);
+         studentService.saveStudent(student5);
+        programmingLessonService.saveLesson(programmingLesson);
+         // ProgrammingLesson programmingLesson2=new ProgrammingLesson(student3,labWorkProgramming4);
+         // programmingLessonService.saveLesson(programmingLesson2);
+      //   student5.addProgrammingLesson(programmingLesson);
+      //  studentService.updateStudent(student5);
+       //  programmingLessonService.saveLesson(programmingLesson);
 
 
 

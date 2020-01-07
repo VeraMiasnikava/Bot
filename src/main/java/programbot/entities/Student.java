@@ -1,6 +1,7 @@
 package programbot.entities;
 
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Fetch;
@@ -8,44 +9,65 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
+//@EqualsAndHashCode
 @Entity
 @Table(name = "students")
 public class Student {
 
-    @Getter
-    @Setter
+    //@Getter
+   // @Setter
     @Id
     @Column(name = "id_student")
     private int idStudent;
 
-    @Getter
+   // @Getter
     @Column(name = "name", length = 30)
     private String name;
 
-    @Getter
+    //@Getter
     @Column(name = "surname", length = 30)
     private String surname;
 
-    @Getter
+   // @Getter
     @Column(name = "groupa", length = 10)
     private String groupa;
 
-    @Getter
-    @Setter
+   // @Getter
+   // @Setter
     @Column(name = "stat")
     private int state;
 
-    @Getter
-    @Setter
+   // @Getter
+   // @Setter
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<ProgrammingLesson> lessons=new ArrayList<>();
 
+    public int getIdStudent() {
+        return idStudent;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getGroupa() {
+        return groupa;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public List<ProgrammingLesson> getLessons() {
+        return lessons;
+    }
 
     public Student() {
     }
@@ -62,6 +84,18 @@ public class Student {
         lessons = new ArrayList<>();
     }
 
+    public void setIdStudent(int idStudent) {
+        this.idStudent = idStudent;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public void setLessons(List<ProgrammingLesson> lessons) {
+        this.lessons = lessons;
+    }
+
     public void setName(String name) throws UnsupportedEncodingException {
         String nm = new String(name.getBytes("cp1251"), "UTF-8");
         this.name = nm;
@@ -75,6 +109,24 @@ public class Student {
     public void setGroupa(String group) throws UnsupportedEncodingException {
         String gr = new String(group.getBytes("cp1251"), "UTF-8");
         this.groupa = gr;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Student)) return false;
+        Student student = (Student) o;
+        return idStudent == student.idStudent &&
+                state == student.state &&
+                name.equals(student.name) &&
+                surname.equals(student.surname) &&
+                groupa.equals(student.groupa) &&
+                Objects.equals(lessons, student.lessons);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idStudent, name, surname, groupa, state, lessons);
     }
 
     @Override

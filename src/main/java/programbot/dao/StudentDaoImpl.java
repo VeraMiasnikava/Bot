@@ -76,10 +76,10 @@ public class StudentDaoImpl implements Dao<Student> {
     @Override
     public Student findById(int id) {
          Student student= HibernateSessionFactory.getSessionFactory().openSession().get(Student.class, id);
-        List<ProgrammingLesson> lessons = (List<ProgrammingLesson>)  HibernateSessionFactory.getSessionFactory().openSession().createQuery("From ProgrammingLesson ").list();
-        for (ProgrammingLesson lesson:lessons) {
-         student.addProgrammingLesson(lesson);
-        }
+      //  List<ProgrammingLesson> lessons = (List<ProgrammingLesson>)  HibernateSessionFactory.getSessionFactory().openSession().createQuery("From ProgrammingLesson ").list();
+        //for (ProgrammingLesson lesson:lessons) {
+         //student.addProgrammingLesson(lesson);
+       // }
         return  student;
     }
 
